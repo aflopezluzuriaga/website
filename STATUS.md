@@ -29,7 +29,7 @@ Last curated: 2026-06-15 (initial integration — Part A, NONE archetype, zero o
 
 ## Current state
 
-- **Kit integration:** Done. The repo was set up via PROJECT_SETUP Part A reconciled to an existing repo (NONE archetype, no optional clusters). `CLAUDE.md`, `STATUS.md`, the `workspace/` skeleton, and `skills/` (always-active floor + `LastSkillUpdate/` mirror) landed in the initial setup commit. The kit source folder `propagation_v4.1/` is left in place for now.
+- **Kit integration:** Done. The repo was set up via PROJECT_SETUP Part A reconciled to an existing repo (NONE archetype, no optional clusters). `CLAUDE.md`, `STATUS.md`, the `workspace/` skeleton, and `skills/` (always-active floor + `LastSkillUpdate/` mirror) landed in the initial setup commit. The kit source folder `propagation_v4.1/` was removed on 2026-06-15 (curated copies retained in `skills/`; full kit exists in the separate kit repo).
 - No site-content workstreams in flight.
 
 ### Pending re-integrations
@@ -46,11 +46,12 @@ Index audit last run: (never)
 
 ## Recent sessions
 
+- **2026-06-15** — Removed `propagation_v4.1/` (full kit folder); curated subset retained in `skills/`. Resolved the kit-disposition open question.
 - **2026-06-15** — Initial kit integration (Part A, NONE archetype, zero optional clusters): generated `CLAUDE.md` and `STATUS.md`, scaffolded the `workspace/` standing folders and `skills/` (always-active floor mirrored into `LastSkillUpdate/`).
 
 ## Open questions
 
-- **`propagation_v4.1/` disposition** — the full kit folder now overlaps with the curated `skills/`. The kit exists elsewhere, so removing `propagation_v4.1/` from this repo is safe; deferred as a separate decision. Keep it as an in-repo copy, or remove it?
+(none)
 
 ## Known issues
 
