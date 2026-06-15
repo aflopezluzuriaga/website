@@ -1,0 +1,114 @@
+% =============================================================================
+%  fmm_coordination_slides_preamble.tex — FMM coordination Beamer slides
+%
+%  Used by: fmm_coordination_slides_latex_skill.md (internal division meetings,
+%           strategic planning, knowledge updates, process documentation).
+%
+%  HOW TO USE: copy the contents of this file into the top of the main .tex
+%  file you produce. This file is a template, not a runtime include — do not
+%  `\input{}` it. It begins with `\documentclass{beamer}` and must be the
+%  literal start of the generated .tex file.
+%
+%  Colors mirror andreas_palette.md. If you add or change a color, update
+%  andreas_palette.md AND every consuming file listed in the palette's
+%  "Files that mirror this palette" section, in one atomic commit.
+%
+%  Background image: this preamble defaults to BackgroundBodyWhite.png for
+%  body slides. If Andrea chose the light-blue background, change the
+%  filename to BackgroundBody.png on the line marked below.
+%
+%  Last updated: May 28, 2026 — v2.0.0 (v3.2: (1) dropped the custom FiraSans body font
+%  (\usepackage[sfdefault]{FiraSans}) and the redundant \familydefault override in favor
+%  of Beamer's default sans (Computer Modern Sans); (2) added the seven new palette colors
+%  (DarkYellow, MintGreen, BrightBlue, BrightYellow, BrightGreen, DeepGreen, LabelGray) to
+%  the \definecolor block, mirroring andreas_palette.md (DarkYellow is the title-slide title
+%  color); (3) repointed the "Used by" header to fmm_coordination_slides_latex_skill.md after the skill rename. Carries the v2.0.0 floor under the two-tracker convention; kit-wide marker reset
+%  and kit package version land at v3.2 cycle close. Prior: v1.0 (May 13, 2026) — extracted
+%  from fmm_coordination_slides_latex_skill.md (then named fmm_coordination_slides_skill.md), palette reconciled to slide-family names, dropped
+%  duplicate LightBluePale.)
+% =============================================================================
+
+\documentclass[aspectratio=169, 10pt]{beamer}
+
+% --- Font --------------------------------------------------------------------
+% Default Beamer sans (Computer Modern Sans) — no font package or directives.
+% v3.2: dropped \usepackage[sfdefault]{FiraSans} and the redundant
+% \renewcommand{\familydefault}{\sfdefault}; Beamer's default font theme is
+% already sans, so no font directives are needed.
+\usepackage[utf8]{inputenc}
+
+% --- Colors — mirror andreas_palette.md --------------------------------------
+\usepackage{xcolor}
+\definecolor{PrimaryBlue}{RGB}{25, 110, 140}
+\definecolor{SecondaryBlue}{RGB}{94, 144, 168}
+\definecolor{LightBlue}{RGB}{203, 216, 223}
+\definecolor{DarkBlue}{RGB}{0, 75, 112}
+\definecolor{SoftBlue}{RGB}{173, 216, 230}
+\definecolor{DarkGreen}{RGB}{76, 114, 52}
+\definecolor{LightGreen}{RGB}{180, 200, 150}
+\definecolor{WarmCream}{RGB}{255, 243, 214}
+\definecolor{DarkYellow}{RGB}{247, 226, 114}
+\definecolor{MintGreen}{RGB}{159, 208, 163}
+\definecolor{BrightBlue}{RGB}{0, 154, 222}
+\definecolor{BrightYellow}{RGB}{255, 218, 0}
+\definecolor{BrightGreen}{RGB}{141, 186, 56}
+\definecolor{DeepGreen}{RGB}{48, 129, 68}
+\definecolor{LabelGray}{RGB}{166, 166, 168}
+
+% --- Packages ----------------------------------------------------------------
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{makecell}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  urlcolor=PrimaryBlue,
+  linkcolor=PrimaryBlue,
+  citecolor=PrimaryBlue,
+  pdfborder={0 0 1}
+}
+
+% --- Navigation and footline -------------------------------------------------
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \ifnum\insertframenumber>1
+    \begin{beamercolorbox}[wd=\paperwidth,ht=0.5in,dp=0ex,center]{footline}%
+      \raisebox{0.2in}{\usebeamerfont{footline}\textcolor{PrimaryBlue}{\insertframenumber}}
+    \end{beamercolorbox}%
+  \fi
+}
+
+% --- Backgrounds — change BackgroundBodyWhite.png to BackgroundBody.png ------
+%     here if Andrea chose the light-blue body background.
+\defbeamertemplate{background canvas}{title}{
+  \includegraphics[width=\paperwidth,height=\paperheight]{BackgroundTitle.png}
+}
+\defbeamertemplate{background canvas}{body}{
+  \includegraphics[width=\paperwidth,height=\paperheight]{BackgroundBodyWhite.png}
+}
+\setbeamertemplate{background canvas}[body]
+
+% --- Color scheme ------------------------------------------------------------
+\setbeamercolor{frametitle}{fg=PrimaryBlue}
+\setbeamercolor{structure}{fg=SecondaryBlue}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{item}{fg=SecondaryBlue}
+\setbeamercolor{subitem}{fg=SecondaryBlue}
+\setbeamerfont{footline}{size=\small}
+
+% --- Spacing -----------------------------------------------------------------
+\setlength{\parskip}{0.8\baselineskip}
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+\setlength{\itemsep}{0.8em}
+\let\olditemize\itemize
+\renewcommand{\itemize}{\olditemize\setlength{\itemsep}{0.8em}\vspace{0.3em}}
+
+% --- Title page — white text on dark background -----------------------------
+\setbeamerfont{title}{series=\bfseries}
+\setbeamercolor{title}{fg=white}
+\setbeamercolor{date}{fg=white}
+

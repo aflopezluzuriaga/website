@@ -1,0 +1,175 @@
+% =============================================================================
+%  academic_paper_preamble.tex — Academic LaTeX paper preamble
+%
+%  Used by: academic_paper_latex_skill.md (working papers, journal
+%           submissions, research documents).
+%
+%  HOW TO USE: copy the contents of this file into the top of the main .tex
+%  file you produce. This file is a template, not a runtime include — do not
+%  `\input{}` it. It begins with `\documentclass{article}` and must be the
+%  literal start of the generated .tex file.
+%
+%  This is an ACADEMIC paper preamble. The document chrome (title,
+%  section headers, links) follows academic conventions — black titles,
+%  default-blue links via `blue!60!black`. No FMM branding (no FMM header,
+%  no IDB logo footer, no PrimaryBlue title).
+%
+%  However, Andrea's palette IS defined here for use in figures, TikZ
+%  diagrams, and pgfplots charts. Figures often travel between an academic
+%  working paper and an FMM policy note as the same chart; they use
+%  Andrea's palette in both contexts.
+%
+%  Colors mirror andreas_palette.md. If you add or change a color, update
+%  andreas_palette.md AND every consuming file listed in the palette's
+%  "Files that mirror this palette" section, in one atomic commit.
+%
+%  Last updated: May 28, 2026 — v2.0.0 (v3.2: added the seven new palette colors
+%  (DarkYellow, MintGreen, BrightBlue, BrightYellow, BrightGreen, DeepGreen, LabelGray)
+%  to the \definecolor block, mirroring andreas_palette.md; available for figures/TikZ.
+%  Carries the v2.0.0 floor under the two-tracker convention; kit-wide marker reset and
+%  kit package version land at v3.2 cycle close. Prior: v1.0 (May 13, 2026) — extracted
+%  from academic_paper_latex_skill.md, Andrea's palette added for figure/TikZ use.)
+% =============================================================================
+
+\documentclass[11pt,letterpaper]{article}
+
+% --- Page layout -------------------------------------------------------------
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+
+% --- Spacing -----------------------------------------------------------------
+\usepackage{setspace}
+\onehalfspacing
+\raggedbottom
+
+\usepackage{float}
+
+% --- Encoding and fonts (pdflatex) -------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+
+% --- Math --------------------------------------------------------------------
+\usepackage{amssymb,amsmath}
+
+% --- Graphics and figures ----------------------------------------------------
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+\usepackage[most]{tcolorbox}
+
+% --- Captions ----------------------------------------------------------------
+\usepackage[
+    justification=centering,
+    labelfont=bf,
+    labelsep=period,
+    font=small,
+    skip=6pt
+]{caption}
+
+% --- Tables ------------------------------------------------------------------
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{calc}
+
+% --- Colors — base xcolor for tables; Andrea's palette for figures/TikZ -----
+\usepackage[table,xcdraw]{xcolor}
+
+% Andrea's palette — mirrors andreas_palette.md.
+% For use in figures, TikZ, and pgfplots. NOT for document chrome (titles,
+% section headers, links) — those follow academic conventions.
+\definecolor{PrimaryBlue}{RGB}{25, 110, 140}
+\definecolor{SecondaryBlue}{RGB}{94, 144, 168}
+\definecolor{LightBlue}{RGB}{203, 216, 223}
+\definecolor{DarkBlue}{RGB}{0, 75, 112}
+\definecolor{SoftBlue}{RGB}{173, 216, 230}
+\definecolor{DarkGreen}{RGB}{76, 114, 52}
+\definecolor{LightGreen}{RGB}{180, 200, 150}
+\definecolor{WarmCream}{RGB}{255, 243, 214}
+\definecolor{DarkYellow}{RGB}{247, 226, 114}
+\definecolor{MintGreen}{RGB}{159, 208, 163}
+\definecolor{BrightBlue}{RGB}{0, 154, 222}
+\definecolor{BrightYellow}{RGB}{255, 218, 0}
+\definecolor{BrightGreen}{RGB}{141, 186, 56}
+\definecolor{DeepGreen}{RGB}{48, 129, 68}
+\definecolor{LabelGray}{RGB}{166, 166, 168}
+
+% --- TikZ and pgfplots -------------------------------------------------------
+\usepackage{tikz,pgfplots}
+% pgfplotsset is optional — include only if the paper uses pgfplots charts
+\pgfplotsset{%
+   compat=newest,
+   tick label style={font=\footnotesize},
+   label style={font=\small},
+   legend style={font=\small},
+   axis x line = center,
+   axis y line = center,
+   every axis/.style={pin distance=1ex},
+   trim axis left
+}
+
+% --- Footnotes ---------------------------------------------------------------
+\usepackage[bottom]{footmisc}
+
+% --- Multi-column ------------------------------------------------------------
+\usepackage{multicol}
+
+% --- Date formatting ---------------------------------------------------------
+\usepackage[en-US]{datetime2}
+\DTMnewdatestyle{monthyear}{%
+  \renewcommand*{\DTMdisplaydate}[4]{\DTMenglishmonthname{##2} ##1}%
+  \renewcommand*{\DTMDisplaydate}{\DTMdisplaydate}%
+}
+
+% --- Microtype ---------------------------------------------------------------
+\usepackage{microtype}
+
+% --- Line numbers (uncomment for draft review) -------------------------------
+\usepackage{lineno}
+%\linenumbers
+
+% --- Bibliography ------------------------------------------------------------
+\usepackage{natbib}
+\bibliographystyle{aer}  % or chicago, plainnat, etc. — confirm with Andrea
+
+% --- Hyperlinks (MUST be last package) ---------------------------------------
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!60!black,
+    citecolor=blue!60!black,
+    urlcolor=blue!60!black,
+    pdftitle={Paper Title},
+    pdfauthor={Author Names}
+}
+
+% =============================================================================
+%  CUSTOM COMMANDS
+% =============================================================================
+
+\newcommand{\figurenote}[1]{%
+    \vspace{4pt}%
+    \begin{minipage}{0.95\linewidth}%
+        \footnotesize \textit{Note:} #1%
+    \end{minipage}%
+}
+
+\newcommand{\figuresource}[1]{%
+    \vspace{2pt}%
+    \begin{minipage}{0.95\linewidth}%
+        \footnotesize \textit{Source:} #1%
+    \end{minipage}%
+}
+
+\newcommand{\tablenote}[1]{%
+    \vspace{4pt}%
+    \begin{minipage}{0.95\linewidth}%
+        \footnotesize \textit{Notes:} #1%
+    \end{minipage}%
+}
+
+% Prevent overfull lines
+\setlength{\emergencystretch}{3em}
+

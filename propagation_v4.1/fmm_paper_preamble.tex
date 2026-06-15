@@ -1,0 +1,174 @@
+\documentclass[letterpaper]{article}
+
+% =============================================================================
+%  fmm_paper_preamble.tex — FMM LaTeX paper preamble
+%
+%  Used by: fmm_paper_latex_skill.md (policy notes, institutional papers,
+%           FMM-styled standalone PDFs).
+%
+%  HOW TO USE: copy the contents of this file into the top of the main .tex
+%  file you produce. This file is a template, not a runtime include — do not
+%  `\input{}` it. It begins with `\documentclass{article}` and must be the
+%  literal start of the generated .tex file.
+%
+%  Colors mirror andreas_palette.md. If you add or change a color, update
+%  andreas_palette.md AND every consuming file listed in the palette's
+%  "Files that mirror this palette" section, in one atomic commit.
+%
+%  Last updated: May 28, 2026 — v2.0.0 (v3.2: added the seven new palette colors
+%  (DarkYellow, MintGreen, BrightBlue, BrightYellow, BrightGreen, DeepGreen, LabelGray)
+%  to the \definecolor block, mirroring andreas_palette.md. Carries the v2.0.0 floor
+%  under the two-tracker convention; kit-wide marker reset and kit package version land
+%  at v3.2 cycle close. Prior: v2.1 (May 13, 2026) — renamed from latex_preamble.tex,
+%  palette names reconciled (LightBluePale->SoftBlue, BgColor->WarmCream); see version
+%  history below.)
+% =============================================================================
+
+% -----------------------------------------------------------------------------
+% Usage notes
+% -----------------------------------------------------------------------------
+% Paragraph spacing convention: this preamble does NOT use \usepackage{parskip}.
+% Paragraphs are separated by blank lines in the source, which by default give
+% LaTeX's standard paragraph indent and no extra vertical space. To match the
+% FMM institutional style — visible blank line between paragraphs, no first-line
+% indent — add \bigskip between paragraphs manually in the body:
+%
+%     First paragraph ends here.
+%
+%     \bigskip
+%
+%     Second paragraph begins here.
+%
+% This is a deliberate choice: per-document control is more predictable than a
+% global parskip setting, which interacts poorly with titles, lists, and tables.
+%
+% In-text citations (\citep, \citet) render in BLACK (citecolor=black). URLs
+% and internal cross-references remain PrimaryBlue. If a document type calls
+% for coloured citations (e.g. an academic paper), override \hypersetup in the
+% document preamble.
+% -----------------------------------------------------------------------------
+
+% Margins: 1in all around — standard US letter margins.
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{setspace}
+\usepackage{natbib}
+\usepackage{amsmath,amssymb}
+
+% Colors — mirror andreas_palette.md
+\usepackage{xcolor}
+\definecolor{PrimaryBlue}{RGB}{25, 110, 140}
+\definecolor{SecondaryBlue}{RGB}{94, 144, 168}
+\definecolor{LightBlue}{RGB}{203, 216, 223}
+\definecolor{DarkBlue}{RGB}{0, 75, 112}
+\definecolor{SoftBlue}{RGB}{173, 216, 230}
+\definecolor{DarkGreen}{RGB}{76, 114, 52}
+\definecolor{LightGreen}{RGB}{180, 200, 150}
+\definecolor{WarmCream}{RGB}{255, 243, 214}
+\definecolor{DarkYellow}{RGB}{247, 226, 114}
+\definecolor{MintGreen}{RGB}{159, 208, 163}
+\definecolor{BrightBlue}{RGB}{0, 154, 222}
+\definecolor{BrightYellow}{RGB}{255, 218, 0}
+\definecolor{BrightGreen}{RGB}{141, 186, 56}
+\definecolor{DeepGreen}{RGB}{48, 129, 68}
+\definecolor{LabelGray}{RGB}{166, 166, 168}
+
+% Boxes
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Graphics and TikZ
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, calc}
+
+% Positioning
+\usepackage[absolute,overlay]{textpos}
+
+% Title and section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{PrimaryBlue}}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{SecondaryBlue}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{SecondaryBlue}}{\thesubsubsection}{1em}{}
+
+% Title formatting
+% NOTE (April 2026): Title is fixed at 14pt to match the Word preamble ceiling.
+% Previously used \LARGE (~17pt). Changed for cross-format consistency.
+% The 14pt max is a hard design decision — Word titles looked too large at
+% bigger sizes. LaTeX \section uses \Large (~14pt), so title and H1 are
+% currently the same size; a future revision could differentiate them
+% (e.g., \section at 13pt) to match the Word hierarchy (14pt title / 13pt H1).
+\usepackage{titling}
+\pretitle{\begin{center}\fontsize{14}{16.8}\selectfont\bfseries\color{PrimaryBlue}}
+\posttitle{\end{center}\vskip 0.5em}
+\preauthor{\begin{center}\large\color{SecondaryBlue}}
+\postauthor{\end{center}}
+\predate{\begin{center}\large\color{SecondaryBlue}}
+\postdate{\end{center}}
+
+% Customize itemize and enumerate
+\usepackage{enumitem}
+\setlist[itemize]{label=\textcolor{PrimaryBlue}{\textbullet}}
+\setlist[enumerate]{label=\textcolor{PrimaryBlue}{\arabic*.}}
+
+% Header and footer
+\usepackage{fancyhdr}
+
+% Set \fmmdate in your document preamble: \renewcommand{\fmmdate}{April 2026}
+\newcommand{\fmmdate}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Header — right-aligned, 9pt SecondaryBlue italic (matches Word)
+\fancyhead[R]{\fontsize{9}{10.8}\selectfont\itshape\textcolor{SecondaryBlue}{%
+  FMM\ifx\fmmdate\empty\else\ --- \fmmdate\fi}}
+
+% Footer — page number (left) + IDB logo (right), no FMM text (header carries it)
+\fancyfoot[LO]{\textcolor{SecondaryBlue}{\thepage}}
+\fancyfoot[RO]{\includegraphics[height=0.25in]{KnowledgeLogo.png}}
+
+\fancyfoot[RE]{\includegraphics[height=0.25in]{KnowledgeLogo.png}}
+\fancyfoot[LE]{\textcolor{SecondaryBlue}{\thepage}}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyhead[R]{\fontsize{9}{10.8}\selectfont\itshape\textcolor{SecondaryBlue}{%
+    FMM\ifx\fmmdate\empty\else\ --- \fmmdate\fi}}
+  \fancyfoot[LO]{\textcolor{SecondaryBlue}{\thepage}}
+  \fancyfoot[RO]{\includegraphics[height=0.25in]{KnowledgeLogo.png}}
+  \fancyfoot[RE]{\includegraphics[height=0.25in]{KnowledgeLogo.png}}
+  \fancyfoot[LE]{\textcolor{SecondaryBlue}{\thepage}}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% Tables
+\usepackage{booktabs}
+
+% Hyperlinks (load last)
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  urlcolor=PrimaryBlue,
+  linkcolor=PrimaryBlue,
+  citecolor=black,
+  pdfborder={0 0 1}
+}
+
+% Version history:
+% v2.0 (May 13, 2026): palette names reconciled (LightBluePale → SoftBlue,
+%   BgColor → WarmCream); added sync header pointing to andreas_palette.md;
+%   clarified copy-paste usage pattern. Part of v3.0 document-generation
+%   architecture work.
+% v1.2 (April 22, 2026): margins reduced 1.25in → 1in; citecolor changed to
+%   black; added usage notes documenting \bigskip paragraph-spacing convention.
+
+
+
